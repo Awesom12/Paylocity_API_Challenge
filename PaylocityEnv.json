@@ -1,0 +1,45 @@
+{
+	"id": "2f18278c-0ecd-4340-94f9-a21c5f17682b",
+	"name": "PaylocityEnv",
+	"values": [
+		{
+			"key": "Token",
+			"value": "",
+			"type": "secret",
+			"enabled": true
+		},
+		{
+			"key": "Request_URL",
+			"value": "https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod/api/employees",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "Username",
+			"value": "TestUser355",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "Password",
+			"value": ".&eV2yB8h=sO",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "id",
+			"value": "add48629-ca80-42a9-9a2d-8fe3bf6a0c10",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "InvalidPassword",
+			"value": "guhinjmk,l%^&*(678",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-03-20T04:58:07.174Z",
+	"_postman_exported_using": "Postman/10.24.6-240318-0452"
+}

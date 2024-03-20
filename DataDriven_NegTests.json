@@ -1,0 +1,322 @@
+{
+	"info": {
+		"_postman_id": "11167527-da90-47ad-a2bd-0e2de82e5fe7",
+		"name": "DataDriven_NegTests",
+		"description": "This Collection consists of Data driven negative tests(run from a collection runner or CLI) for POST request with\n\n1\\. Missing last name\n\n2\\. Number data type for first name\n\n3\\. Too long first name\n\nAnd for a PUT request to update an employee with\n\n1\\. Missing first name\n\n2\\. Too long last name\n\n3\\. Too many dependents",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31838975",
+		"_collection_link": "https://www.postman.com/research-observer-88949110/workspace/paylocity-api-challenge/collection/31838975-11167527-da90-47ad-a2bd-0e2de82e5fe7?action=share&source=collection_link&creator=31838975"
+	},
+	"item": [
+		{
+			"name": "Add Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"//Response should have relevant error message",
+							"pm.test(\"Verify that the response body exists\", function () {",
+							"    let jsonData = pm.response.json();",
+							"        pm.expect(jsonData).to.exist",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{Password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{Username}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic {{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"{{firstName}}\",\n    \"lastName\": \"{{lastName}}\",\n    \"dependants\": \"{{dependants}}\"\n}\n"
+				},
+				"url": {
+					"raw": "{{Request_URL}}",
+					"host": [
+						"{{Request_URL}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add Employee",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Natasha\",\n    \"lastName\": \"Romanoff\",\n    \"dependants\": 3\n}"
+						},
+						"url": {
+							"raw": "https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod/api/employees",
+							"protocol": "https",
+							"host": [
+								"wmxrwq14uc",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"api",
+								"employees"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "278"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 03 Feb 2020 19:09:21 GMT"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "3396c97b-999d-4f05-9a05-e703570f753e"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "HVZrMGHHoAMFygA="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-5e386fe1-6e06a18a49d85a67160a88a7;Sampled=0"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 7b891ba5ffaf08dd209adf67026190db.cloudfront.net (CloudFront)"
+						},
+						{
+							"key": "X-Amz-Cf-Pop",
+							"value": "ORD52-C1"
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "nFIi5rL0BsEjX8yNyOIIgOTSBrAoosGndMNagg_yN3RMBGx-TQYmVA=="
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"partitionKey\": \"TestUser1\",\n    \"sortKey\": \"1945d706-39f3-49eb-bea8-98abcf766e5e\",\n    \"username\": \"TestUser1\",\n    \"id\": \"1945d706-39f3-49eb-bea8-98abcf766e5e\",\n    \"firstName\": \"Natasha\",\n    \"lastName\": \"Romanoff\",\n    \"dependants\": 3,\n    \"salary\": 52000,\n    \"gross\": 2000,\n    \"benefitsCost\": 96.1538544,\n    \"net\": 1903.84619\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"//Response should have relevant error message\r",
+							"pm.test(\"Verify that the response body exists\", function () {\r",
+							"    let jsonData = pm.response.json();\r",
+							"        pm.expect(jsonData).to.exist\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{Password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{Username}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic {{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"{{id}}\",\r\n    \"firstName\": \"{{firstName}}\",\r\n    \"lastName\": \"{{lastName}}\",\r\n    \"dependants\": \"{{dependants}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{Request_URL}}",
+					"host": [
+						"{{Request_URL}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update Employee",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1945d706-39f3-49eb-bea8-98abcf766e5e\",\r\n    \"firstName\": \"Wanda\",\r\n    \"lastName\": \"Maximoff\",\r\n    \"dependants\": 2\r\n}"
+						},
+						"url": {
+							"raw": "https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod/api/employees",
+							"protocol": "https",
+							"host": [
+								"wmxrwq14uc",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"Prod",
+								"api",
+								"employees"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "273"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 03 Feb 2020 19:12:29 GMT"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "b3f07a0a-aba4-48e4-9855-2b6fc99920e3"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "HVaIhGR9IAMFZgw="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-5e38709c-30cd94066950169ffcb7b740;Sampled=0"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 7b891ba5ffaf08dd209adf67026190db.cloudfront.net (CloudFront)"
+						},
+						{
+							"key": "X-Amz-Cf-Pop",
+							"value": "ORD52-C1"
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "aFTv25JDJ9ReKZpm8rSalwgyZ3wvDFHd39pTnfc_isJNtJ9H4qXnXw=="
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"partitionKey\": \"TestUser1\",\n    \"sortKey\": \"1945d706-39f3-49eb-bea8-98abcf766e5e\",\n    \"username\": \"TestUser1\",\n    \"id\": \"1945d706-39f3-49eb-bea8-98abcf766e5e\",\n    \"firstName\": \"Wanda\",\n    \"lastName\": \"Maximoff\",\n    \"dependants\": 2,\n    \"salary\": 52000,\n    \"gross\": 2000,\n    \"benefitsCost\": 76.92308,\n    \"net\": 1923.0769\n}"
+				}
+			]
+		}
+	]
+}
